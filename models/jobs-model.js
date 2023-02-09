@@ -26,11 +26,6 @@ const jobSchema = new mongoose.Schema({
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       "Please provide valid and Unique email",
     ],
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: [true, "Please Provide Password"],
   },
 });
 module.exports = mongoose.model("Job", jobSchema);

@@ -8,7 +8,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 const notFoundMiddleware = require("./middleware/not-found");
 const morgan = require("morgan");
 const authRoutes = require("./routes/auth-routes");
-const recruiterRoutes = require("./routes/recruiter-routes");
+const userRoutes = require("./routes/user-routes");
 const cors = require("cors");
 
 app.use(morgan("dev"));
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 //my routers
 app.use("/auth", authRoutes);
-app.use("/api", recruiterRoutes);
+app.use("/api", userRoutes);
 app.use(notFoundMiddleware);
 
 app.use(errorHandlerMiddleware);
