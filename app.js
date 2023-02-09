@@ -7,11 +7,8 @@ const connectDb = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const notFoundMiddleware = require("./middleware/not-found");
 const morgan = require("morgan");
-const adminAuthRoutes = require("./routes/admin-auth-routes");
-const studentAuthRoutes = require("./routes/student-auth-routes");
-const adminRoutes = require("./routes/admin-routes");
-const studyschemeRoutes = require("./routes/study-scheme-routes");
-const studentRoutes = require("./routes/student-routes");
+const authRoutes = require("./routes/auth-routes");
+const recruiterRoutes = require("./routes/recruiter-routes");
 const cors = require("cors");
 
 app.use(morgan("dev"));
@@ -24,8 +21,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const notesRoutes = require("./routes/notes-routes");
-const paperRoutes = require("./routes/paper-routes");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -43,22 +38,10 @@ app.use((req, res, next) => {
 });
 
 //my routers
-app.use("/auth/admin", adminAuthRoutes);
-app.use("/admin", adminRoutes);
-app.use("/auth/student", studentAuthRoutes);
-app.use("/notes", notesRoutes);
-app.use("/paper", paperRoutes);
-app.use("/studyscheme", studyschemeRoutes);
-app.use("/student", studentRoutes);
-// not found middleware
+app.use("/auth", authRoutes);
+app.use("/api", recruiterRoutes);
 app.use(notFoundMiddleware);
-// app.use((req, res, next) => {
-//   const error = new Error("Not found");
-//   error.status = 404;
-//   next(error);
-// });
 
-//error handler middleware
 app.use(errorHandlerMiddleware);
 
 const PORT = process.env.PORT || 5000;
@@ -66,7 +49,7 @@ const PORT = process.env.PORT || 5000;
 const start = async (req, res) => {
   try {
     await connectDb(
-      "mongodb+srv://shahwaiz:JCdUqcyl1nfW75B7@taskmanager.an4it.mongodb.net/prhaku?retryWrites=true&w=majority"
+      "mongodb+srv://shahwaiz:JCdUqcyl1nfW75B7@taskmanager.an4it.mongodb.net/jobportal?retryWrites=true&w=majority"
     );
     app.listen(PORT, console.log(`server is listening on port ${PORT} `));
   } catch (error) {
