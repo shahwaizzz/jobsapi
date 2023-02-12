@@ -61,6 +61,14 @@ const populateDB = async (req, res) => {
   const recruiters = await Recruiter.insertMany(recruitersData);
   res.status(StatusCodes.OK).json({ msg: "Users Created" });
 };
+const getImage = async (req, res) => {
+  const recruiter = await Recruiter.findOne({ _id: req.params.id });
+  res.sendFile(recruiter.logo);
+};
+const getProfilePic = async (req, res) => {
+  const applicant = await Applicant.findOne({ _id: req.params.id });
+  res.sendFile(applicant.profilePic);
+};
 
 module.exports = {
   createJob,
@@ -71,4 +79,6 @@ module.exports = {
   getApplicants,
   getRecruiters,
   populateDB,
+  getImage,
+  getProfilePic,
 };

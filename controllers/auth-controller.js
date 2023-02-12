@@ -3,7 +3,10 @@ const Applicant = require("../models/applicant-model");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 const register = async (req, res) => {
-  const recruiter = await Recruiter.create({ ...req.body });
+  const recruiter = await Recruiter.create({
+    ...req.body,
+    logo: req.file.path,
+  });
   const token = await recruiter.createJWT();
   res.status(StatusCodes.CREATED).json({ token });
 };

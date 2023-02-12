@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 });
 
 //my routers
+app.use("/uploads", express.static("uploads"));
 app.use("/auth", authRoutes);
 app.use("/api", userRoutes);
 app.use(notFoundMiddleware);
